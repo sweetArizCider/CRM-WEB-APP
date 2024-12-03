@@ -21,94 +21,109 @@ if(!$result){
 
 
 <body>
-
     <div class="box-inicio">
-    <header><?php include("../login_inte/navbar.php"); ?></header>
+        <header><?php include("../login_inte/navbar.php"); ?></header>
         <br>  
         <h1>Contactos</h1>
         <input type="submit" id="agregarcontacto" value="    +    ">
         <a href="exportcon.php"><button class="botonexportar">Export</button></a>
         
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Empresa</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Direccion</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Endswitch</th> 
-                    
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            while( $row = mysqli_fetch_assoc($result)){
-                echo "
-
-              <tr>
-              <td>".$row["Empresa"]."</td>
-              <td>".$row["Nombre"]."</td>
-              <td>".$row["Apellido"]."</td>
-              <td>".$row["Direccion"]."</td>
-              <td>".$row["Correo"]."</td>
-              <td>".$row["Numero"]."</td>
-              <td>
-              <div class='button-container-icon'>
-              <button><img src='../img/editar.png' alt='editar' width='25rem' height='25rem' align='start'  onclick='edit_con(".$row["id_contacto"].")'>
-              <button id='btneliminar'><img src='../img/eliminar.png' alt='eliminar' width='25rem' height='25rem' align='end' onclick=''>
-             </div>
-              </td>
-            </tr>
-            "; 
-            }
-           
-            ?>
-            
-            </tbody>
-        </table>
-    </div>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Direccion</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Endswitch</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "
+                    <tr>
+                        <td>".$row["Empresa"]."</td>
+                        <td>".$row["Nombre"]."</td>
+                        <td>".$row["Apellido"]."</td>
+                        <td>".$row["Direccion"]."</td>
+                        <td>".$row["Correo"]."</td>
+                        <td>".$row["Numero"]."</td>
+                        <td>
+                            <div class='button-container-icon'>
+                                <button><img src='../img/editar.png' alt='editar' width='25rem' height='25rem' align='start' onclick='edit_con(".$row["id_contacto"].")'></button>
+                                <button id='btneliminar' onclick='confirmDelete(".$row["id_contacto"].")'>
+                                    <img src='../img/eliminar.png' alt='eliminar' width='25rem' height='25rem' align='end'>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    "; 
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>¿Esta seguro que desea eliminar este contacto?</h2>
-      <br>
-      <p>
-        <div class="button-container">
-        <button class="butonelim" id="">Eliminar</button>
-        <button class="butonelim" id="btncancelar">Cancelar</button>
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>¿Está seguro que desea eliminar este contacto?</h2>
+            <br>
+            <p>
+                <div class="button-container">
+                    <button class="butonelim" id="btneliminar-confirm">Eliminar</button>
+                    <button class="butonelim" id="btncancelar">Cancelar</button>
+                </div>
+            </p>
         </div>
-     </p>
     </div>
-    </div>
+
     <script>
-    
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("btneliminar");
-var span = document.getElementsByClassName("close")[0];
-var btnc = document.getElementById("btncancelar");
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+        var btnc = document.getElementById("btncancelar");
+        var btnEliminarConfirm = document.getElementById("btneliminar-confirm");
 
-     btn.onclick = function() {
-     modal.style.display = "block";
-    }
+        function confirmDelete(id) {
+            modal.style.display = "block";
+            btnEliminarConfirm.onclick = function() {
+                // Enviar la solicitud de eliminación al servidor
+                fetch(`eliminar_contacto.php?id=${id}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        alert(data); // Mostrar la respuesta del servidor
+                        modal.style.display = "none";
+                        location.reload(); // Recargar la página para reflejar los cambios
+                    })
+                    .catch(error => console.error('Error:', error));
+            };
+        }
 
-span.onclick = function() {
-  modal.style.display = "none";
-}
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
 
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-btnc.onclick =function(){
- modal.style.display = "none";
-}
-</script>
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        btnc.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        function edit_con(a) {
+            window.location = "detallecontacto_edit.php?id=" + a;
+        }
+    </script>
+</body>
+
 
    <style>
     .modal {
@@ -184,46 +199,6 @@ btnc.onclick =function(){
         <button id="Añadir" type="submit" onclick="return validateForm()">Añadir</button>
         
     </form>
-
-    <!-- Aqui va la logica prueba de git asdkjfhadslfhdslkjf -->
-    <script>
-        function edit_con(a){
-            window.location="detallecontacto_edit.php?id="+a;
-        
-        }
-        function validateForm(){
-            var b = document.forms["añacon"]["contacto-a"].value;
-            var a = document.forms["añacon"]["contacto-n"].value;
-            var c = document.forms["añacon"]["contacto-t"].value;
-            var d = document.forms["añacon"]["contacto-d"].value;
-            var f = document.forms["añacon"]["contacto-c"].value;
-            if(a == "" || b == "" || c == "" ||d == "" ||f == "" ){
-                alert("Favor de rellenar todos los campos ");
-                return false;
-            }
-        }
-    const mostrarVentanaBtn = document.getElementById('agregarcontacto');
-    const cerrarVentanaBtn = document.getElementById('cerrarVentana');
-    const ventana = document.getElementById('ventana');
-    const fondo = document.getElementById('fondo');
-
-    mostrarVentanaBtn.addEventListener('click', function() {
-        ventana.style.display = 'block';
-        fondo.style.display = 'block';
-    });
-
-    cerrarVentanaBtn.addEventListener('click', function() {
-        ventana.style.display = 'none';
-        fondo.style.display = 'none';
-    });
-    
-    // Esto cierra la ventana si se hace clic en el fondo
-    fondo.addEventListener('click', function() {
-        ventana.style.display = 'none';
-        fondo.style.display = 'none';
-    });
-    </script>
-
 
     <style>
     #agregarcontacto{
