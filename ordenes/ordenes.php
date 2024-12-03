@@ -12,7 +12,7 @@ if (!isset($_SESSION['token'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requisiciones</title>
+    <title> LEAR - Requisiciones</title>
     <link rel="shortcut icon" href="../img/learlogo.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/normalized.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -36,6 +36,13 @@ if (!isset($_SESSION['token'])) {
             font-family: Montserrat;
             font-weight: 700;
             color: #451851;
+        }
+        h2{
+        text-align: left;
+            font-family: Montserrat;
+            font-weight: 700;
+            color: #451851;
+            margin-bottom: 1rem;
         }
 
         p {
@@ -203,45 +210,54 @@ if (!isset($_SESSION['token'])) {
     </div>
      <!-- Modal para añadir una nueva requisición -->
      <div id="modal">
-            <div class="modal-content">
+            <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
                 <span class="close" onclick="cerrarModal()">&times;</span>
                 <h2>Agregar Requisición</h2>
                 <form id="formRequisicion" onsubmit="enviarRequisicion(event)">
                     <!-- Formulario aquí -->
-                    <label for="fkidCliente">Cliente:</label>
-                    <select id="fkidCliente" name="fkidCliente" required>
+                    <div class="mb-3">
+                    <label for="fkidCliente" class="form-label">Cliente:</label>
+                    <select id="fkidCliente" name="fkidCliente" class="form-select" required>
                         <!-- Opciones se llenarán dinámicamente -->
                     </select>
-                    <br><br>
-                    <label for="fechaCreacion">Fecha de Creación:</label>
-                    <input type="date" id="fechaCreacion" name="fechaCreacion" required>
-                    <br><br>
-                    <label for="cantidadServicio">Cantidad de Servicio:</label>
-                    <input type="number" id="cantidadServicio" name="cantidadServicio" required>
-                    <br><br>
-                    <label for="cantidadDinero">Cantidad de Dinero:</label>
-                    <input type="number" step="0.01" id="cantidadDinero" name="cantidadDinero" required>
-                    <br><br>
-                    <label for="servicio">Servicio:</label>
-                    <input type="text" id="servicio" name="servicio" required>
-                    <br><br>
-                    <button type="submit">Enviar</button>
+                    </div>
+                    <div class="mb-3">
+                    <label for="fechaCreacion" class="form-label">Fecha de Creación:</label>
+                    <input type="date" id="fechaCreacion" name="fechaCreacion" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="cantidadServicio" class="form-label">Cantidad de Servicio:</label>
+                    <input type="number" id="cantidadServicio" name="cantidadServicio"  class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="cantidadDinero" class="form-label">Cantidad de Dinero:</label>
+                    <input type="number" step="0.01" id="cantidadDinero" name="cantidadDinero" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="servicio" class="form-label">Servicio:</label>
+                    <input type="text" id="servicio" name="servicio" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-primary btn-rounded agregarordenb">Enviar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="modalEdit">
-            <div class="modal-content">
+    <div id="modalEdit" >
+            <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
                 <span class="close" onclick="cerrarModalEdit()">&times;</span>
                 <h2>Editar Requisición</h2>
                 <form id="editRequisicion" onsubmit="enviarEdicion(event)">
                     <!-- Formulario aquí -->
-            <label for="idRequisicion">ID Requisición:</label>
-            <input type="text" id="idRequisicion" name="idRequisicion" required>
-            
-            <label for="estado">Estado:</label>
-            <select id="estado" name="estado" required>
+                    <div class="mb-3">
+            <label for="idRequisicion" class="form-label">ID Requisición:</label>
+            <input type="text" id="idRequisicion" name="idRequisicion" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <label for="estado" class="form-label">Estado:</label>
+            <select id="estado" name="estado" class="form-select" required>
                 <option value="Creado">Creado</option>
                 <option value="En proceso">En proceso</option>
                 <option value="Enviado">Enviado</option>
@@ -250,29 +266,38 @@ if (!isset($_SESSION['token'])) {
                 <option value="Pospuesto">Pospuesto</option>
                 <option value="Reembolsado">Reembolsado</option>
             </select>
-            
-            <label for="cantidadServicio">Cantidad de Servicio:</label>
-            <input type="number" id="cantidadServicio" name="cantidadServicio">
-            
-            <label for="cantidadDinero">Cantidad de Dinero:</label>
-            <input type="number" step="0.01" id="cantidadDinero" name="cantidadDinero">
-            
-            <label for="servicio">Servicio:</label>
-            <input type="text" id="servicio" name="servicio">
-            
-            <label for="fechaAlteracion">Fecha de Alteración:</label>
-            <input type="date" id="fechaAlteracion" name="fechaAlteracion">
-            
-            <label for="motivoCancelacion">Motivo Cancelación:</label>
-            <input type="text" id="motivoCancelacion" name="motivoCancelacion">
-            
-            <label for="motivoPosposicion">Motivo Posposición:</label>
-            <input type="text" id="motivoPosposicion" name="motivoPosposicion">
-            
-            <label for="motivoReembolso">Motivo Reembolso:</label>
-            <input type="text" id="motivoReembolso" name="motivoReembolso">
-            
-            <button type="submit">Enviar</button>
+            </div>
+            <div class="mb-3">
+            <label for="cantidadServicio" class="form-label">Cantidad de Servicio:</label>
+            <input type="number" id="cantidadServicio" name="cantidadServicio" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="cantidadDinero" class="form-label">Cantidad de Dinero:</label>
+            <input type="number" step="0.01" id="cantidadDinero" name="cantidadDinero" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="servicio" class="form-label">Servicio:</label>
+            <input type="text" id="servicio" name="servicio" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="fechaAlteracion" class="form-label">Fecha de Alteración:</label>
+            <input type="date" id="fechaAlteracion" name="fechaAlteracion" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="motivoCancelacion" class="form-label">Motivo Cancelación:</label>
+            <input type="text" id="motivoCancelacion" name="motivoCancelacion" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="motivoPosposicion" class="form-label">Motivo Posposición:</label>
+            <input type="text" id="motivoPosposicion" name="motivoPosposicion" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label for="motivoReembolso" class="form-label">Motivo Reembolso:</label>
+            <input type="text" id="motivoReembolso" name="motivoReembolso" class="form-control">
+            </div>
+            <div class="mb-3">
+            <button type="submit" class="btn btn-primary btn-rounded agregarordenb">Enviar</button>
+            </div>
         </form>
     </div>
 </div>

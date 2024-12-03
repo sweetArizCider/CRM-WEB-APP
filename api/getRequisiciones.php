@@ -21,7 +21,7 @@ $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';  // Por defecto 'ASC'
 // Consultar todas las requisiciones con la empresa asociada y orden
 $query = "SELECT r.idRequisicion, r.fkidCliente, r.fechaCreacion, r.fechaEnvio, r.fechaEntrega, r.estado,
                  r.cantidadServicio, r.cantidadDinero, r.servicio, r.motivoCancelacion,
-                 r.motivoPosposicion, r.motivoReembolso, r.fechaAlteracion, c.empresa
+                 r.motivoPosposicion, r.motivoreembolso, r.fechaAlteracion, c.empresa
           FROM Requisiciones r
           JOIN Cliente c ON r.fkidCliente = c.idCliente
           ORDER BY r.fechaCreacion $order";
@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
             "servicio" => $row['servicio'],
             "motivoCancelacion" => $row['motivoCancelacion'],
             "motivoPosposicion" => $row['motivoPosposicion'],
-            "motivoReembolso" => $row['motivoReembolso'],
+            "motivoReembolso" => $row['motivoreembolso'],
             "fechaAlteracion" => $row['fechaAlteracion']
         ];
     }

@@ -11,145 +11,177 @@ if (!isset($_SESSION['token'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../login_inte/estilo.css">
-
+    <title> LEAR - Clientes</title>
+    <link rel="shortcut icon" href="../img/learlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalized.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    
     <style>
-    /* Agregar estilos específicos de la página si es necesario */
+        .navbar {
+            background: linear-gradient(100deg,  #451851, #F39F59);
+        }
 
-    .table {
-        margin-top: 20px;
-        overflow-x: auto;
-    }
+        .navbar a {
+            color: white !important;
+            font-family: Montserrat;
+            font-weight: 500;
 
-    table {
+        }
+
+        h1 {
+            text-align: left;
+            font-family: Montserrat;
+            font-weight: 700;
+            color: #451851;
+        }
+        h2{
+        text-align: left;
+            font-family: Montserrat;
+            font-weight: 700;
+            color: #451851;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            text-align: left;
+            font-size: 1.2rem;
+            font-family: Inter;
+        }
+
+        .btn-rounded {
+            border-radius: 30px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+        .navordenes{
+            margin-left: 5em;
+            margin-right: 5em;
+        }
+        .iconcerrar{
+            margin-right: 2em;
+        }
+        .agregarordenb{
+            background-color: #451851;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+           
+        }
+        .editarordenb{
+            background-color:  #AD445A;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            
+        }
+        /* Ajustes en estilos del modal */
+    #modalAgregarCliente, #modalEdit {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        border-collapse: collapse;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
     }
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
+    .modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        margin: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+        max-width: 500px;
+        z-index: 1050;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    /* Estilo para el modal */
-    .modal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 1000; /* Número alto para asegurarse de que esté encima de otros elementos */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
-    
-}
 
-/* Contenido del modal */
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 400px;
-    z-index: 1001; /* Un número mayor que el del contenedor modal para estar en la capa superior */
-}
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        color: #aaa;
+    }
 
-/* Estilo para el botón de cerrar */
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
+    .close:hover {
+        color: black;
+    }
 
-/* Botones y formulario */
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form label,
-form input {
-    margin-bottom: 10px;
-}
-
-        /* Estilización del botón */
-        button[type="submit"] {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049; /* Verde oscuro */
-}
-
-/* Estilización del select */
-select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    box-sizing: border-box; /* Asegura que el padding esté incluido en el ancho total */
-}
-
-select:focus {
-    border-color: #4CAF50; /* Color de borde cuando se enfoca */
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-}
-
-#agregarCliente {
-    background-color: #008CBA; /* Azul */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-#agregarCliente:hover {
-    background-color: #007bb5; /* Azul oscuro */
-    transform: scale(1.05); /* Efecto de aumento */
-}
-
-
-    
-</style>
+    </style>
 </head>
 
 <body>
-    <div class="box-inicio">
-        <header><?php include("../login_inte/navbar.php"); ?></header>
-        <br>
-        <h1>Gestión de Clientes</h1>
-        <button id="agregarCliente" onclick="mostrarModalAgregarCliente()">Añadir Cliente</button>
+<header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container-fluid text-center">
+                <a class="navbar-brand text-center" href="../login_inte/home.php">
+                    <img src="../img/logoinvert.png" alt="logo" width="35px" style="margin-left: 2em; ">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../contactos/contactos.php">Contactos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  class="nav-link navordenes" href="../ordenes/ordenes.php">Órdenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../clientes/clientes.php">Clientes</a>
+                        </li>
+                    </ul>
+                    <a class="nav-link iconcerrar" href="../login_inte/logout.php">
+                        <img src="../img/off.svg" alt="Cerrar Sesión" width="25px">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-5 pt-5">
+        
+        <h1>¡Administra tus clientes!</h1>
+        <p>Accede y actualiza la información de tus clientes para mantener relaciones eficientes y efectivas.</p>
+        <div class="d-flex justify-content-end gap-2 mb-3">
+        <button id="agregarCliente" onclick="mostrarModalAgregarCliente()" class="btn btn-primary btn-rounded agregarordenb">Añadir <img src="../img/add.svg" alt="" style="width: 20px; justify-content: center"></button>
+        </div>
+        
 
-        <br><br>
-
-        <div class="table">
-            <table id="tablaClientes">
+        <div class="table table-responsive">
+            <table id="tablaClientes" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Empresa</th>
@@ -165,46 +197,50 @@ select:focus {
         </div>
 
         <!-- Modal para añadir un nuevo cliente -->
-        <div id="modalAgregarCliente" style="display: none;">
-    <div class="modal-content">
+    <div id="modalAgregarCliente" >
+    <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
         <span class="close" onclick="cerrarModalAgregarCliente()">&times;</span>
         <h2>Agregar Cliente</h2>
         <form id="formAgregarCliente" onsubmit="enviarCliente(event)">
-            <label for="empresa">Empresa:</label>
-            <input type="text" id="empresa" name="empresa" required>
-            <br><br>
-            
-            <label for="cdMatriz">CD Matriz:</label>
-            <input type="text" id="cdMatriz" name="cdMatriz" required>
-            <br><br>
-            
-            <label for="presupuesto">Presupuesto:</label>
-            <input type="number" step="0.01" id="presupuesto" name="presupuesto" required>
-            <br><br>
-            
-            <label for="estatus">Estatus:</label>
-            <select id="estatus" name="estatus" required>
+        <div class="mb-3">
+            <label for="empresa"  class="form-label">Empresa:</label>
+            <input type="text" id="empresa" name="empresa" class="form-control" required>
+        </div>
+            <div class="mb-3">
+            <label for="cdMatriz"  class="form-label">CD Matriz:</label>
+            <input type="text" id="cdMatriz" name="cdMatriz" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <label for="presupuesto"  class="form-label">Presupuesto:</label>
+            <input type="number" step="0.01" id="presupuesto" name="presupuesto" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <label for="estatus"  class="form-label">Estatus:</label>
+            <select id="estatus" name="estatus" class="form-select" required>
                 <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
             </select>
-            <br><br>
-            
-            <label for="calle">Calle:</label>
-            <input type="text" id="calle" name="calle" required>
-            <br><br>
-            
-            <label for="cp">Código Postal:</label>
-            <input type="text" id="cp" name="cp" required>
-            <br><br>
-            
-            <label for="numExterior">Número Exterior:</label>
-            <input type="text" id="numExterior" name="numExterior" required>
-            <br><br>
-            
-            <button type="submit">Agregar</button>
+            </div>
+            <div class="mb-3">
+            <label for="calle"  class="form-label">Calle:</label>
+            <input type="text" id="calle" name="calle" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <label for="cp"  class="form-label">Código Postal:</label>
+            <input type="text" id="cp" name="cp" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <label for="numExterior"  class="form-label">Número Exterior:</label>
+            <input type="text" id="numExterior" name="numExterior" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <button type="submit" class="btn btn-primary btn-rounded agregarordenb">Agregar</button>
+            </div>
         </form>
     </div>
 </div>
+
+<script src="../css/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 
 
 <script>

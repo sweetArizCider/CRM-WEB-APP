@@ -20,22 +20,184 @@ if (!isset($_SESSION['token'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../login_inte/estilo.css">
-
+    <title> LEAR - Contactos</title>
+    <link rel="shortcut icon" href="../img/learlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalized.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 </head>
+
+<style>
+        .navbar {
+            background: linear-gradient(100deg,  #451851, #F39F59);
+        }
+
+        .navbar a {
+            color: white !important;
+            font-family: Montserrat;
+            font-weight: 500;
+
+        }
+
+        h1 {
+            text-align: left;
+            font-family: Montserrat;
+            font-weight: 700;
+            color: #451851;
+        }
+        h2{
+        text-align: left;
+            font-family: Montserrat;
+            font-weight: 700;
+            color: #451851;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            text-align: left;
+            font-size: 1.2rem;
+            font-family: Inter;
+        }
+
+        .btn-rounded {
+            border-radius: 30px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+        }
+        .navordenes{
+            margin-left: 5em;
+            margin-right: 5em;
+        }
+        .iconcerrar{
+            margin-right: 2em;
+        }
+        .agregarordenb{
+            background-color: #451851 !important;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+           
+        }
+        .editarordenb{
+            background-color:  #AD445A;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            
+        }
+        /* Ajustes en estilos del modal */
+    #myModal, #myModaal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        margin: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+        max-width: 500px;
+        z-index: 1050;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        color: #aaa;
+    }
+
+    .close:hover {
+        color: black;
+    }
+    .iconEditarBorrar{
+        border: none;
+        background: none;
+    }
+
+    </style>
 
 
 <body>
-    <div class="box-inicio">
-        <header><?php include("../login_inte/navbar.php"); ?></header>
-        <br>  
-        <h1>Contactos</h1>
-        <input type="submit" id="agregarcontacto" value="    +    ">
-        <a href="exportcon.php"><button class="botonexportar">Export</button></a>
+<header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container-fluid text-center">
+                <a class="navbar-brand text-center" href="../login_inte/home.php">
+                    <img src="../img/logoinvert.png" alt="logo" width="35px" style="margin-left: 2em; ">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../contactos/contactos.php">Contactos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  class="nav-link navordenes" href="../ordenes/ordenes.php">Órdenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../clientes/clientes.php">Clientes</a>
+                        </li>
+                    </ul>
+                    <a class="nav-link iconcerrar" href="../login_inte/logout.php">
+                        <img src="../img/off.svg" alt="Cerrar Sesión" width="25px">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-5 pt-5">
+       
+        <h1>¡Mantén tus contactos actualizados!</h1>
+        <p>Gestiona y organiza toda la información de tus contactos de manera eficiente para facilitar tus relaciones comerciales.</p>
+        <div class="d-flex justify-content-end gap-2 mb-3">
+       
+        <input class="btn btn-primary btn-rounded agregarordenb" type="submit" id="agregarcontacto" value="+" onclick="mostrarMyModal()">
+        <a href="exportcon.php"><button class="botonexportar btn btn-secondary btn-rounded editarordenb">Export</button></a>
+        </div>
         
-        <div class="table">
-            <table>
+    <div class="table table-responsive">
+        <div class="table" >
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Empresa</th>
@@ -60,9 +222,9 @@ if (!isset($_SESSION['token'])) {
                         <td>".$row["Numero"]."</td>
                         <td>
                             <div class='button-container-icon'>
-                                <button><img src='../img/editar.png' alt='editar' width='25rem' height='25rem' align='start' onclick='edit_con(".$row["id_contacto"].")'></button>
-                                <button id='btneliminar' onclick='confirmDelete(".$row["id_contacto"].")'>
-                                    <img src='../img/eliminar.png' alt='eliminar' width='25rem' height='25rem' align='end'>
+                                <button class='iconEditarBorrar'><img src='../img/editarcontacto.svg' alt='editar' width='25px' height='25px' align='start' onclick='edit_con(".$row["id_contacto"].")'></button>
+                                <button class='iconEditarBorrar' id='btneliminar' onclick='confirmDelete(".$row["id_contacto"].")'>
+                                    <img src='../img/eliminarcontacto.svg' alt='eliminar' width='25px' height='25px' align='end'>
                                 </button>
                             </div>
                         </td>
@@ -74,22 +236,71 @@ if (!isset($_SESSION['token'])) {
             </table>
         </div>
     </div>
+    
 
     <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
+        <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+        <span class="close" onclick="cerrarModalAgregarCliente()">&times;</span>
             <h2>¿Está seguro que desea eliminar este contacto?</h2>
-            <br>
+            
             <p>
                 <div class="button-container">
-                    <button class="butonelim" id="btneliminar-confirm">Eliminar</button>
-                    <button class="butonelim" id="btncancelar">Cancelar</button>
+                    <button class="butonelim btn btn-primary btn-rounded agregarordenb"  id="btneliminar-confirm">Eliminar</button>
+                    <button class="butonelim btn btn-secondary btn-rounded editarordenb"  id="btncancelar">Cancelar</button>
                 </div>
             </p>
         </div>
     </div>
 
+   
+   
+    <div id="myModaal" class="modal">
+        <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
+        <span class="close" onclick="cerrarMyModal()">&times;</span>
+    <!-- Esto es el contenido de la ventana -->
+
+    <form  id="ventana" method="POST" action="añadircontacto.php" name="añacon">
+   <h2>Agregar Contacto</h2>
+   <div class="mb-3">
+        <label for="Empresa" class="form-label">Empresa</label>
+        <input type="text" placeholder="Escribe la empresa" id="Empresa" name="contacto-e" class="form-control">
+   </div>
+        <div class="mb-3">
+        <label for="Nombre" class="form-label">Nombre</label>
+        <input type="text" placeholder="Escribe el nombre" id="Nombre" name="contacto-n" class="form-control">
+        </div>
+        <div class="mb-3">
+        <label for="ApellidoP" class="form-label">Apellido </label>
+        <input type="text" placeholder="Escribe el apellido " id="ApellidoP" name="contacto-a" class="form-control">
+        </div>
+        <div class="mb-3">
+        <label for="Telefono" class="form-label">Telefono</label>
+        <input type="tel" placeholder="Escribe el numero" id="Telefono" name="contacto-t" class="form-control">
+        </div>
+        <div class="mb-3">
+        <label for="Direccion" class="form-label">Direccion</label>
+        <input type="text" placeholder="Escribe la direccion" id="" name="contacto-d" class="form-control">
+        </div>
+        <div class="mb-3">
+        <label for="Correo" class="form-label">Correo</label>
+        <input type="email" placeholder="ejem@gmail.com" id="Correo" name="contacto-c" class="form-control">
+        <br>
+        <button id="Añadir" class="btn btn-primary btn-rounded agregarordenb" type="submit" onclick="return validateForm()">Añadir</button>
+        
+    </form>
+        </div>
+    </div>
+</div>
+    <script src="../css/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        function mostrarMyModal() {
+        document.getElementById('myModaal').style.display = 'block';
+    }
+    
+    function cerrarMyModal() {
+        document.getElementById('myModaal').style.display = 'none';
+    }
+
         var modal = document.getElementById("myModal");
         var span = document.getElementsByClassName("close")[0];
         var btnc = document.getElementById("btncancelar");
@@ -136,141 +347,13 @@ if (!isset($_SESSION['token'])) {
             window.location = "detallecontacto_edit.php?id=" + a;
         }
     </script>
-</body>
 
 
-   <style>
-    .modal {
-  display: none; /* La modal está oculta por defecto */
-  position: fixed;
-  z-index: 1; /* Aparece sobre otros elementos */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
-  
-}
 
-/* Estilos para el contenido de la modal */
-.modal-content {
-  border-radius: 5px;
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  display: block;
-  
-  
-}
-
-/* Estilos para el botón de cierre (X) */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-</style>
-
-    <!-- Este es el cuadro en el que salen -->
-    <div id="fondo" ></div>
    
 
-    <!-- Esto es el contenido de la ventana -->
-    <form  id="ventana" method="POST" action="añadircontacto.php" name="añacon">
-    <button type="button" id="cerrarVentana">X</button> <h2>Agregar Contacto</h2>
-
-        <label for="Empresa">Empresa</label>
-        <input type="text" placeholder="Escribe la empresa" id="Empresa" name="contacto-e">
-
-        <label for="Nombre">Nombre</label>
-        <input type="text" placeholder="Escribe el nombre" id="Nombre" name="contacto-n">
-
-        <label for="ApellidoP">Apellido </label>
-        <input type="text" placeholder="Escribe el apellido " id="ApellidoP" name="contacto-a">
-
-        <label for="Telefono">Telefono</label>
-        <input type="tel" placeholder="Escribe el numero" id="Telefono" name="contacto-t">
-
-        <label for="Direccion">Direccion</label>
-        <input type="text" placeholder="Escribe la direccion" id="" name="contacto-d">
-
-        <label for="Correo">Correo</label>
-        <input type="text" placeholder="ejem@gmail.com" id="Correo" name="contacto-c">
-        <br>
-        <button id="Añadir" type="submit" onclick="return validateForm()">Añadir</button>
-        
-    </form>
-
-    <style>
-    #agregarcontacto{
-    background-color: rgb(42, 72, 204);
-    font-size: 15px;
-    color: #FFFFFF;
-    cursor: pointer;
-    margin-bottom: 5px;
     
-    }
-    #ventana {
-    display: none; /* Ocultar por defecto */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    padding: 20px;
-    background-color: rgb(226, 223, 223);
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    border-radius: 5px;
-    
-    }
-    #fondo {
-    display: none; /* Ocultar por defecto */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    }
-    #cerrarVentana{
-    background-color:red;
-    color: #FFFFFF;
-    cursor: pointer;
-    padding: 5px 8px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    outline: none;  
-   }
-   #Añadir{
-    background-color: rgb(42, 72, 204);
-    color: #FFFFFF;
-    cursor: pointer;
-    padding: 9px 8px;
-    font-size: 17px;
-    border: black;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    outline: none;  
-   }
 
-    </style>
+    
 </body>
 </html>
