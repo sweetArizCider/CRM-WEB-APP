@@ -8,185 +8,175 @@ if (!isset($_SESSION['token'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Requisiciones</title>
-    <link rel="stylesheet" href="../login_inte/estilo.css">
+    <link rel="shortcut icon" href="../img/learlogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalized.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    
+    
     <style>
-        /* Agregar estilos para que el modal se centre */
-        #modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .navbar {
+            background: linear-gradient(100deg,  #451851, #F39F59);
         }
 
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
+        .navbar a {
+            color: white !important;
+            font-family: Montserrat;
+            font-weight: 500;
+
         }
 
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
+        h1 {
+            text-align: left;
+            font-family: Montserrat;
+            font-weight: 700;
+            color: #451851;
         }
 
+        p {
+            text-align: left;
+            font-size: 1.2rem;
+            font-family: Inter;
+        }
+
+        .btn-rounded {
+            border-radius: 30px;
+        }
 
         .table {
             margin-top: 20px;
-            overflow-x: auto;
         }
 
         table {
             width: 100%;
+            text-align: left;
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
+            padding: 10px;
             border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
         }
 
-        #agregarorden {
-            background-color: #2A48CC;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 8px; /* Bordes redondeados */
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s; /* Efecto de transición */
+        th {
+            background-color: #f4f4f4;
         }
-
-        #agregarorden:hover {
-            background-color: #1A2F8D; /* Cambio de color al pasar el ratón */
-            transform: scale(1.05); /* Efecto de zoom */
-        }
-
-        #formRequisicion button {
-            background-color: #28A745;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 8px; /* Bordes redondeados */
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s; /* Efecto de transición */
-        }
-
-        #formRequisicion button:hover {
-            background-color: #218838; /* Cambio de color al pasar el ratón */
-            transform: scale(1.05); /* Efecto de zoom */
-        }
-
-         /* Estilo para el modal */
-         #modalEdit {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+        .navbar-nav {
             display: flex;
-            align-items: center;
             justify-content: center;
+            gap: 30px;
+            width: 100%;
         }
+        .navordenes{
+            margin-left: 5em;
+            margin-right: 5em;
+        }
+        .iconcerrar{
+            margin-right: 2em;
+        }
+        .agregarordenb{
+            background-color: #451851;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+           
+        }
+        .editarordenb{
+            background-color:  #AD445A;
+            border: none;
+            padding-left: 20px;
+            padding-right: 20px;
+            
+        }
+        /* Ajustes en estilos del modal */
+    #modal, #modalEdit {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1040;
+    }
 
-        /* Estilización del botón */
-button[type="submit"] {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        position: relative;
+        margin: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 90%;
+        max-width: 500px;
+        z-index: 1050;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 
-button[type="submit"]:hover {
-    background-color: #45a049; /* Verde oscuro */
-}
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        color: #aaa;
+    }
 
-/* Estilización del select */
-select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    outline: none;
-    box-sizing: border-box; /* Asegura que el padding esté incluido en el ancho total */
-}
-
-select:focus {
-    border-color: #4CAF50; /* Color de borde cuando se enfoca */
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
-}
-
-/* Estilización del botón "Editar órden" */
-#editarorden {
-    background-color: #008CBA; /* Azul */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-#editarorden:hover {
-    background-color: #007bb5; /* Azul oscuro */
-    transform: scale(1.05); /* Efecto de aumento */
-}
-
-#editarorden:focus {
-    outline: none; /* Eliminar el borde de enfoque */
-}
-
-
+    .close:hover {
+        color: black;
+    }
 
     </style>
 </head>
 
-
 <body>
-    <div class="box-inicio">
-        <header><?php include("../login_inte/navbar.php"); ?></header>
-        <br>
-        <h1>Requisiciones</h1>
-        <button id="agregarorden" onclick="mostrarModal()">Añadir órden</button>
-        <button id="editarorden" onclick="mostrarModalEdit()">Editar órden</button>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container-fluid text-center">
+                <a class="navbar-brand text-center" href="../login_inte/home.php">
+                    <img src="../img/logoinvert.png" alt="logo" width="35px" style="margin-left: 2em; ">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../contactos/contactos.php">Contactos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  class="nav-link navordenes" href="../ordenes/ordenes.php">Órdenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../clientes/clientes.php">Clientes</a>
+                        </li>
+                    </ul>
+                    <a class="nav-link iconcerrar" href="../login_inte/logout.php">
+                        <img src="../img/off.svg" alt="Cerrar Sesión" width="25px">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-        <br><br>
+    <div class="container mt-5 pt-5">
+        <h1>¡Gestiona tus solicitudes!</h1>
+        <p>Completa el formulario de requisición y nuestro equipo procesará tu solicitud a la brevedad.</p>
+        <div class="d-flex justify-content-end gap-2 mb-3">
+            <button id="agregarorden" class="btn btn-primary btn-rounded agregarordenb" onclick="mostrarModal()">Añadir <img src="../img/add.svg" alt="" style="width: 20px; justify-content: center"></button>
+            <button id="editarorden" class="btn btn-secondary btn-rounded editarordenb" onclick="mostrarModalEdit()">Editar <img src="../img/edit.svg" alt="" style="width: 20px; justify-content: center"></button>
+        </div>
 
-        <div class="table">
-            <table id="tablaRequisiciones">
+        <div class="table-responsive">
+            <table id="tablaRequisiciones" class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>ID Requisición</th>
@@ -210,13 +200,14 @@ select:focus {
                 </tbody>
             </table>
         </div>
-
-        <!-- Modal para añadir una nueva requisición -->
-        <div id="modal">
+    </div>
+     <!-- Modal para añadir una nueva requisición -->
+     <div id="modal">
             <div class="modal-content">
                 <span class="close" onclick="cerrarModal()">&times;</span>
                 <h2>Agregar Requisición</h2>
                 <form id="formRequisicion" onsubmit="enviarRequisicion(event)">
+                    <!-- Formulario aquí -->
                     <label for="fkidCliente">Cliente:</label>
                     <select id="fkidCliente" name="fkidCliente" required>
                         <!-- Opciones se llenarán dinámicamente -->
@@ -241,10 +232,11 @@ select:focus {
     </div>
 
     <div id="modalEdit">
-    <div class="modal-content">
-        <span class="close" onclick="cerrarModalEdit()">&times;</span>
-        <h2>Editar Requisición</h2>
-        <form id="editRequisicion" onsubmit="enviarEdicion(event)">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModalEdit()">&times;</span>
+                <h2>Editar Requisición</h2>
+                <form id="editRequisicion" onsubmit="enviarEdicion(event)">
+                    <!-- Formulario aquí -->
             <label for="idRequisicion">ID Requisición:</label>
             <input type="text" id="idRequisicion" name="idRequisicion" required>
             
@@ -286,14 +278,50 @@ select:focus {
 </div>
 
 
+
+    <script src="../css/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        function mostrarModalEdit() {
-            document.getElementById('modalEdit').style.display = 'block';
-        }
-        
-        function cerrarModalEdit() {
-            document.getElementById('modalEdit').style.display = 'none';
-        }
+      function mostrarModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'block';
+}
+
+function cerrarModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+function mostrarModalEdit() {
+    const modalEdit = document.getElementById('modalEdit');
+    modalEdit.style.display = 'block';
+}
+
+function cerrarModalEdit() {
+    const modalEdit = document.getElementById('modalEdit');
+    modalEdit.style.display = 'none';
+}
+
+// Cerrar modal al hacer clic fuera
+window.onclick = function(event) {
+    const modal = document.getElementById('modal');
+    const modalEdit = document.getElementById('modalEdit');
+    if (event.target === modal) cerrarModal();
+    if (event.target === modalEdit) cerrarModalEdit();
+};
+
+
+function mostrarModalEdit() {
+    document.getElementById('modalEdit').style.display = 'block';
+    document.getElementById('modal').style.display = 'none'; // Cierra el otro modal si está abierto
+}
+
+function cerrarModalEdit() {
+    document.getElementById('modalEdit').style.display = 'none';
+}
+
+
+
 
         async function enviarEdicion(event) {
             event.preventDefault();
@@ -374,13 +402,7 @@ select:focus {
             }
         }
 
-        function mostrarModal() {
-            document.getElementById('modal').style.display = 'block';
-        }
-
-        function cerrarModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
+       
 
         async function enviarRequisicion(event) {
             event.preventDefault();
