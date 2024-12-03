@@ -17,7 +17,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo '
             <script> 
             alert("Bienvenido" );
-            window.location = "home.html";
+            window.location = "home.php";
             </script>
             ';
          } else{

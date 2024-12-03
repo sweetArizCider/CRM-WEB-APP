@@ -88,6 +88,8 @@ if(!$result){
         var span = document.getElementsByClassName("close")[0];
         var btnc = document.getElementById("btncancelar");
         var btnEliminarConfirm = document.getElementById("btneliminar-confirm");
+        const mostrarVentanaBtn = document.getElementById('agregarcontacto');
+
 
         function confirmDelete(id) {
             modal.style.display = "block";
@@ -103,6 +105,12 @@ if(!$result){
                     .catch(error => console.error('Error:', error));
             };
         }
+
+        mostrarVentanaBtn.addEventListener('click', function() {
+    ventana.style.display = 'block';
+    fondo.style.display = 'block';
+});
+
 
         span.onclick = function() {
             modal.style.display = "none";
