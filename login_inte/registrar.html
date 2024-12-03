@@ -16,7 +16,7 @@
         <input type="text" placeholder="Escribe tu apellido " id="ApellidoP" name="apellido-registro">
 
         <label for="Correo">Correo</label>
-        <input type="text" placeholder="ejem@gmail.com" id="Correo" name="correo-registro">
+        <input type="email" placeholder="ejem@gmail.com" id="Correo" name="correo-registro">
 
         <label for="Contraseña">Contraseña</label>
         <input type="password" placeholder="Escribe tu contraseña" id="password" name="pass-registro">
@@ -48,14 +48,5 @@
     alert("favor de ingresar el apellido");
     return false;
   }
-   // Simple email validation regex
-   var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (!validRegex.test(b)) {
-          alert("favor de ingresar un email valido");
-          return false;
-        } 
-
-      
-    
 }
 </script>
