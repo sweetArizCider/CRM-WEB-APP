@@ -4,31 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LEAR</title>
-    <link rel="stylesheet" href="estilo.css">
-    <body>
+    <link rel="shortcut icon" href="../img/learlogo.png" type="image/x-icon">
     
-    <form name="log" method="post" action="loginpro.php">
-    <h2>Iniciar sesión</h2>
-    <label for="username">Usuario</label>
-    <input type="text" placeholder="Ingresa tu usuario" id="username" name="correo-login">
+    <link rel="stylesheet" href="../css/normalized.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <style>
+        body {
+            /* Gradiente de fondo */
+            background: linear-gradient(to bottom left, #451851, #F39F59);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Inter;
+        }
+        .btn-primary {
+            background-color: #451851; /* Cambiar color */
+            border: none;
+            border-radius: 25px; /* Bordes redondeados */
+            font-size: 16px;
+            padding: 10px 20px;
+        }
 
-    <label for="password">Contraseña</label>
-    <input type="password" placeholder="Ingresa tu contraseña" id="password" name="pass-login">
-    
-    <input type="submit" class="button" value="Iniciar" onclick="return validateForm()">
+        .btn-primary:hover {
+            background-color: #AD445A; /* Color más oscuro en hover */
+        }
+        .titleInicio{
+            font-family: Montserrat;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        .custom-link {
+        color: #AD445A !important; 
+        text-decoration: none; 
+        }
 
-    <div class="recordar">
-        <a class="link" href="recordar.php">Olvide mi contraseña</a>
+        .custom-link:hover {
+        color: #451851 !important; 
+        text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+
+    <div class="login-container bg-white d-flex">
+        <!-- Columna Izquierda con la Imagen -->
+        <div class="col-6">
+            <img src="../img/logpimg.jpg" alt="Imagen de inicio de sesión" class="login-image">
+        </div>
+
+        <!-- Columna Derecha con los Datos del Formulario -->
+        <div class="col-6 p-5">
+            <img src="../img/lear.png" alt="logotipo" width="20%" >
+            <h2 class="text-center mb-4 titleInicio">Iniciar sesión</h2>
+            <form name="log" method="post" action="loginpro.php">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Correo</label>
+                    <input type="text" id="username" name="correo-login" placeholder="Ingresa tu correo" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" name="pass-login" placeholder="Ingresa tu contraseña" class="form-control">
+                </div>
+                <div class="d-grid mb-3">
+                    <input type="submit" class="btn btn-primary" value="Continuar" onclick="return validateForm()">
+                </div>
+                <div class="text-center mb-2">
+                    <a href="recordar.php" class="link-primary custom-link">Olvidé mi contraseña</a>
+                </div>
+                <div class="text-center">
+                    <p>¿No tienes una cuenta? <a href="registrar.html" class="link-primary custom-link">Registrarse</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <br>
-    <div class="registrarse">
-        <p>¿No tienes una cuenta?</p><a class="link" href="registrar.html">Registrarse</a>  
-    </div>
-</form>
- 
-    </body>
-</head>  
+    <script>
+        function validateForm() {
+            var a = document.forms["log"]["pass-login"].value;
+            var b = document.forms["log"]["correo-login"].value;
+            
+            if (a === "") {
+                alert("Favor de ingresar una contraseña");
+                return false;
+            }
+            if (b === "") {
+                alert("Favor de ingresar un usuario");
+                return false;
+            }
+        }
+    </script>
+
+    <script src="./css/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
 <script>
     function validateForm(){
