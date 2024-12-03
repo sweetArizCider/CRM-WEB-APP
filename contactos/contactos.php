@@ -7,6 +7,12 @@ if(!$result){
     echo "problema con la conexion";
 }
 
+session_start();
+
+if (!isset($_SESSION['token'])) {
+    header('Location: /login_inte/login.html');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
