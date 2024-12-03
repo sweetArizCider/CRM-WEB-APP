@@ -39,64 +39,65 @@
         .custom-link {
         color: #AD445A !important; 
         text-decoration: none; 
+        font-size: .9rem;
         }
 
         .custom-link:hover {
         color: #451851 !important; 
         text-decoration: none;
+        font-size: .9rem;
+        }
+        .textacc{
+
+            font-size: .9rem;
+        }  
+        .marginoff{
+            margin-top: -.5em;
+        }
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                width: 90%;
+            }
         }
         
     </style>
 </head>
-<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+<body>
 
     <div class="login-container bg-white d-flex">
         <!-- Columna Izquierda con la Imagen -->
-        <div class="col-6">
+        <div class="col-md-6 d-none d-md-block">
             <img src="../img/logpimg.jpg" alt="Imagen de inicio de sesión" class="login-image">
         </div>
 
-        <!-- Columna Derecha con los Datos del Formulario -->
-        <div class="col-6 p-5">
-            <img src="../img/lear.png" alt="logotipo" width="20%" >
+         <!-- Columna Derecha con los Datos del Formulario -->
+         <div class="col-md-6 p-5">
+            <img src="../img/lear.png" alt="logotipo" class="d-block mx-auto mb-4" style="width: 30%;">
             <h2 class="text-center mb-4 titleInicio">Iniciar sesión</h2>
             <form name="log" method="post" action="loginpro.php">
                 <div class="mb-3">
                     <label for="username" class="form-label">Correo</label>
-                    <input type="text" id="username" name="correo-login" placeholder="Ingresa tu correo" class="form-control">
+                    <input type="text" id="username" name="correo-login" placeholder="Ingresa tu correo" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="password" name="pass-login" placeholder="Ingresa tu contraseña" class="form-control">
+                    <input type="password" id="password" name="pass-login" placeholder="Ingresa tu contraseña" class="form-control" required>
                 </div>
                 <div class="d-grid mb-3">
                     <input type="submit" class="btn btn-primary" value="Continuar" onclick="return validateForm()">
                 </div>
-                <div class="text-center mb-2">
-                    <a href="recordar.php" class="link-primary custom-link">Olvidé mi contraseña</a>
+                <div class="text-center mb-2 marginoff">
+                    <a href="recordar.php" class="custom-link">Olvidé mi contraseña</a>
                 </div>
-                <div class="text-center">
-                    <p>¿No tienes una cuenta? <a href="registrar.html" class="link-primary custom-link">Registrarse</a></p>
+                <div class="text-center marginoff">
+                    <p class="textacc">¿No tienes una cuenta? <a href="registrar.html" class="custom-link">Registrarse</a></p>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        function validateForm() {
-            var a = document.forms["log"]["pass-login"].value;
-            var b = document.forms["log"]["correo-login"].value;
-            
-            if (a === "") {
-                alert("Favor de ingresar una contraseña");
-                return false;
-            }
-            if (b === "") {
-                alert("Favor de ingresar un usuario");
-                return false;
-            }
-        }
-    </script>
+   
 
     <script src="./css/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
@@ -106,13 +107,5 @@
         var a = document.forms["log"]["pass-login"].value;
         var b = document.forms["log"]["correo-login"].value;
         
-        if(a == ""){
-            alert("favor deingresar una contraseña");
-            return false;
-        }
-        if(b == ""){
-            alert("favor deingresar un usuario");
-            return false;
-        }
     }
 </script>

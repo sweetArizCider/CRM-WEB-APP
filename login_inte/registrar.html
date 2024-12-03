@@ -1,52 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEAR</title>
+  <link rel="shortcut icon" href="../img/learlogo.png" type="image/x-icon">
+  <link rel="stylesheet" href="../css/normalized.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      font-family: Inter;
+    }
+
+    .btn-primary {
+      background-color: #451851;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      padding: 10px 20px;
+    }
+
+    .btn-primary:hover {
+      background-color: #AD445A;
+    }
+
+    .right-column img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+
+    .left-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .registro {
+      max-width: 75%;
+      width: 100%;
+    }
+    .form-label{
+      text-align: left !important;
+    }
+    .titleInicio{
+      font-family: Montserrat;
+      font-weight: bold;
+      font-size: 2.3rem;
+    }
+    .custom-link {
+      color: #AD445A !important; 
+      text-decoration: none; 
+      font-size: .9rem;
+    }
+
+    .custom-link:hover {
+      color: #451851 !important; 
+      text-decoration: none;
+      font-size: .9rem;
+    }
+    .textacc{
+      font-size: .9rem;
+    }
+    .classphar{
+      margin-top: .5em;
+    }
+    @media (max-width: 768px) {
+            .right-column img {
+                height: 15vh;
+            }
+            .left-column {
+      
+      height: 80vh;
+    }
+    
+
+        }
+    
+  </style>
 </head>
+
 <body>
-    <form name="regis" class="registro" method="post" action="registro.php"  >
-        <h2>Registrarse</h2>
-        <label for="Nombre">Nombre</label>
-        <input type="text" placeholder="Escribe tu nombre" id="Nombre" name="nombre-registro">
+  <div class="container-fluid h-100">
+    <div class="row h-100 g-0">
+      <!-- Columna derecha para la imagen -->
+      <div class="col-md-6 right-column">
+        <img src="../img/logpimg.jpg" alt="Imagen de ejemplo">
+      </div>
+      <!-- Columna izquierda para el formulario -->
+      <div class="col-md-6 d-flex left-column">
+        <form name="regis" class="registro " method="post" action="registro.php">
+          <img src="../img/lear.png" alt="logotipo" class="d-block mx-auto mb-4" style="width: 20%;">
+          <h2 class="mb-4 text-center titleInicio">¡Únete al equipo!</h2>
+          <div class="mb-3">
+            <label for="Nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="Nombre" name="nombre-registro" placeholder="Escribe tu nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="ApellidoP" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="ApellidoP" name="apellido-registro" placeholder="Escribe tu apellido" required>
+          </div>
+          <div class="mb-3">
+            <label for="Correo" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="Correo" name="correo-registro" placeholder="ejem@gmail.com" required>
+          </div>
+          <div class="mb-4">
+            <label for="Contraseña" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="pass-registro" placeholder="Escribe tu contraseña" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" onclick="return validateForm()">Continuar</button>
+          <div class="text-center classphar ">
+            <p class="textacc">¿Ya tienes una cuenta? <a href="login.html" class="custom-link">Registrarse</a></p>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-        <label for="ApellidoP">Apellido </label>
-        <input type="text" placeholder="Escribe tu apellido " id="ApellidoP" name="apellido-registro">
-
-        <label for="Correo">Correo</label>
-        <input type="email" placeholder="ejem@gmail.com" id="Correo" name="correo-registro">
-
-        <label for="Contraseña">Contraseña</label>
-        <input type="password" placeholder="Escribe tu contraseña" id="password" name="pass-registro">
-
-        <input type="submit" class="button" value="Registrar" onclick="return validateForm()">
-
-    </form>
-</body>
-</html>
-<script>
+  <script>
     function validateForm() {
-  var a = document.forms["regis"]["pass-registro"].value;
-  var b = document.forms["regis"]["correo-registro"].value;
-  var c = document.forms["regis"]["apellido-registro"].value;
-  var x = document.forms["regis"]["nombre-registro"].value;
-  if (x == "") {
-    alert("favor de ingresar el nombre");
-    return false;
-  }
-  if (a == "") {
-    alert("favor de ingresar la contraseña");
-    return false;
-  }
-  if (b == "") {
-    alert("Nfavor de ingresar el correo");
-    return false;
-  }
-  if (c == "") {
-    alert("favor de ingresar el apellido");
-    return false;
-  }
-}
-</script>
+      var a = document.forms["regis"]["pass-registro"].value;
+      var b = document.forms["regis"]["correo-registro"].value;
+      var c = document.forms["regis"]["apellido-registro"].value;
+      var x = document.forms["regis"]["nombre-registro"].value;
+      
+    }
+  </script>
+</body>
+
+</html>
