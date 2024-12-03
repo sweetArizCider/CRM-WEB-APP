@@ -1,12 +1,11 @@
 <?php
 session_start();
-
-// Verificar si la sesión está activa
 if (!isset($_SESSION['token'])) {
     header('Location: /login_inte/login.html');
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
