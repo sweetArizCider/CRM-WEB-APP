@@ -18,6 +18,9 @@
                     <li>
                         <a class="nav-link" href="../clientes/clientes.php">Clientes</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="../login_inte/logout.php">Cerrar Sesion</a>
+                    </li>
                     
                 </ul>
             </div>
