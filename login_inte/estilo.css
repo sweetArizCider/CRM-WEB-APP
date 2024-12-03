@@ -1,0 +1,230 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    background-image: url(https://mimaquila.com/wp-content/uploads/2022/04/lear-4.png);
+    background-repeat: no-repeat;
+    background-size: 250vh;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    font-family: Helvetica, sans-serif;
+    position: relative;
+    
+}
+header{
+    
+    width: 100%;
+}
+form{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border-radius: 15px;
+    background-color:rgb(163, 163, 163);
+    box-shadow: 0px 0px 30px black;
+}
+.detalles{
+    padding: 20px;
+    display: flex;
+    flex-direction:column;
+    width: 70%;
+    height: 50%;
+    border-radius: 15px;
+    background-color: rgb(214, 214, 214);
+    box-shadow: none;
+    position:sticky;
+    top:0;
+    z-index:1;
+    border-top:0;
+    overflow-y: auto;
+    height: 350px;
+    align-content: center;
+}
+.inpudetalles{
+    background-color: rgb(230, 230, 230);
+    border-radius: 2px;
+    width: 100%;
+}
+h2{
+    text-align: center;
+    font-size: 30px;
+    color:black;
+    margin-bottom:15px;
+    
+}
+
+h1{
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: white;
+    text-align: center;
+    background: black;
+    border-radius: 5px;
+    width: 22rem;
+    height: 3rem;
+    padding-top: 5px;
+}
+label{
+    font-size: 17px;
+    margin-bottom: 10px;
+    
+}
+a{
+    font-size: 17px;
+    padding: 10px 9px;
+
+}
+input{
+    padding: 9px 8px;
+    font-size: 17px;
+    border: black;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    background-color: #FAFAFC;
+    outline: none;      
+}
+.botonexportar{
+    padding: 9px 8px;
+    font-size: 15px;
+    border: rgb(15, 14, 14);
+    border-radius: 10px;
+    margin-bottom: 25px;
+    outline: none; 
+    background-color: rgb(226, 20, 20); 
+    color: white; 
+}
+.button{
+    background-color: rgb(42, 72, 204);
+    font-size: 15px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin: 0 auto; /* Centra horizontalmente */
+    display: block;
+    
+}
+.butonelim{
+    background-color: rgb(174, 179, 179);
+    font-size: 15px;
+    color: #000000;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    width: auto;
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 10px 20px;
+    border: none;
+}
+.butonelim:hover{
+    background-color: rgb(63, 89, 238);
+}
+.button-container {
+    display: flex;
+    gap: 20px; /* Espacio entre los botones */
+    margin: 0 auto; /* Centra horizontalmente */
+    
+  }
+  .button-container-icon{
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    margin: 0 auto; /* Centra horizontalmente */
+    justify-content: center;
+    
+    
+  }
+.buttonactu{
+    background-color: rgb(174, 179, 179);
+    font-size: 15px;
+    color: #000000;
+    cursor: pointer;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    width: 15%;
+    margin: 0 auto; /* Centra horizontalmente */
+    display: block;
+    padding: 10px 20px;
+    border: none;
+}
+.buttonactu:hover{
+    background-color: rgb(63, 89, 238);
+}
+
+.registro{
+    padding: 15px 30px;
+    width: 500px;
+    
+}
+.recordar{
+    text-align: center;
+}
+.rc{
+    padding: 15px 30px;
+    width: 500px;
+}
+.box-inicio{
+    width: 100%;
+    max-width: 90%;
+    margin: auto;
+    padding: 0px;
+}
+td{
+    border: 1px solid grey;
+    text-align: center;
+    background: rgb(221, 215, 215);
+    font-size: 18px;
+}
+th{
+    background-color: black;
+    color: white;
+    width: 6rem;
+    border: 1px solid grey;
+    font-size: 18px;
+    position:sticky;
+    top:0;
+    z-index:1;
+    border-top:0;
+ 
+}
+
+table{
+    border-collapse: collapse;
+    height: auto;
+    position:sticky;
+    top:0;
+    z-index:1;
+    border-top:0;
+   
+    
+}
+.table{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 350px;
+
+}
+
+
+
+.box-contenido{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    padding: 2%;
+
+}
+.contenido{
+    width: 100%;
+    height: 50%;
+    background: rgb(238, 234, 234);
+    border-radius: 1%;
+   text-align: center;
+   box-shadow: 0px 0px 20px black;
+   font-size: 8rem;
+}

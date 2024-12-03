@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <form name="regis" class="registro" method="post" action="registro.php"  >
+        <h2>Registrarse</h2>
+        <label for="Nombre">Nombre</label>
+        <input type="text" placeholder="Escribe tu nombre" id="Nombre" name="nombre-registro">
+
+        <label for="ApellidoP">Apellido </label>
+        <input type="text" placeholder="Escribe tu apellido " id="ApellidoP" name="apellido-registro">
+
+        <label for="Correo">Correo</label>
+        <input type="text" placeholder="ejem@gmail.com" id="Correo" name="correo-registro">
+
+        <label for="Contraseña">Contraseña</label>
+        <input type="password" placeholder="Escribe tu contraseña" id="password" name="pass-registro">
+
+        <input type="submit" class="button" value="Registrar" onclick="return validateForm()">
+
+    </form>
+</body>
+</html>
+<script>
+    function validateForm() {
+  var a = document.forms["regis"]["pass-registro"].value;
+  var b = document.forms["regis"]["correo-registro"].value;
+  var c = document.forms["regis"]["apellido-registro"].value;
+  var x = document.forms["regis"]["nombre-registro"].value;
+  if (x == "") {
+    alert("favor de ingresar el nombre");
+    return false;
+  }
+  if (a == "") {
+    alert("favor de ingresar la contraseña");
+    return false;
+  }
+  if (b == "") {
+    alert("Nfavor de ingresar el correo");
+    return false;
+  }
+  if (c == "") {
+    alert("favor de ingresar el apellido");
+    return false;
+  }
+   // Simple email validation regex
+   var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!validRegex.test(b)) {
+          alert("favor de ingresar un email valido");
+          return false;
+        } 
+
+      
+    
+}
+</script>
