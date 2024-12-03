@@ -15,25 +15,21 @@ if(!empty($_POST)){
     $row = mysqli_fetch_assoc($result);
     
     if(mysqli_num_rows($result) > 0){
-    //correo
+    
     $mail = new PHPMailer(true);
 
     try {
-    //Server settings
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'crmutt450@gmail.com';                     //SMTP username
-    $mail->Password   = 'sisk qxtk joas ufek';                               //SMTP password
-    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-    //Recipients
+    $mail->isSMTP();                                        
+    $mail->Host       = 'smtp.gmail.com';                 
+    $mail->SMTPAuth   = true;                                 
+    $mail->Username   = 'crmutt450@gmail.com';                  
+    $mail->Password   = 'sisk qxtk joas ufek';                         
+    $mail->Port       = 587;                                   
     $mail->setFrom('crmutt450@gmail.com', 'Mailer');
-    $mail->addAddress($row["email"], $row["nombre"]);     //Add a recipient
+    $mail->addAddress($row["email"], $row["nombre"]);    
 
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->isHTML(true);                                 
     $mail->Subject = 'Here is the subject';
     $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

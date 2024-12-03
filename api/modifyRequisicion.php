@@ -1,18 +1,14 @@
 <?php
-// Establecer el encabezado para respuesta en formato JSON
 header('Content-Type: application/json');
 
-// Parámetros de conexión
 $host = "bo7u6pimi9mondx2jxvm-mysql.services.clever-cloud.com";
 $database = "bo7u6pimi9mondx2jxvm";
 $user = "ujcxv1mcmvh3szov";
 $password = "HC2zESAuuPDUBO3WLngB";
 $port = 3306;
 
-// Crear la conexión
 $conn = new mysqli($host, $user, $password, $database, $port);
 
-// Verificar conexión
 if ($conn->connect_error) {
     die(json_encode([
         "success" => false,
@@ -20,7 +16,6 @@ if ($conn->connect_error) {
     ]));
 }
 
-// Obtener datos del formulario
 $p_idRequisicion = $_POST['idRequisicion'] ?? null;
 $p_estado = $_POST['estado'] ?? null;
 $p_cantidadServicio = $_POST['cantidadServicio'] ?? null;
@@ -31,7 +26,6 @@ $p_motivoCancelacion = $_POST['motivoCancelacion'] ?? null;
 $p_motivoPosposicion = $_POST['motivoPosposicion'] ?? null;
 $p_motivoReembolso = $_POST['motivoReembolso'] ?? null;
 
-// Validar que los campos obligatorios no estén vacíos
 if (empty($p_idRequisicion) || empty($p_estado)) {
     die(json_encode([
         "success" => false,
@@ -40,7 +34,6 @@ if (empty($p_idRequisicion) || empty($p_estado)) {
 }
 
 try {
-    // Preparar la consulta
     $sql = "CALL ModificarRequisicion(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
 
@@ -48,7 +41,6 @@ try {
         throw new Exception("Error al preparar la consulta: " . $conn->error);
     }
 
-    // Convertir valores NULL explícitos
     $p_cantidadServicio = $p_cantidadServicio !== null ? floatval($p_cantidadServicio) : null;
     $p_cantidadDinero = $p_cantidadDinero !== null ? floatval($p_cantidadDinero) : null;
     $p_servicio = $p_servicio !== null ? strval($p_servicio) : null;
@@ -57,8 +49,7 @@ try {
     $p_motivoPosposicion = $p_motivoPosposicion !== null ? strval($p_motivoPosposicion) : null;
     $p_motivoReembolso = $p_motivoReembolso !== null ? strval($p_motivoReembolso) : null;
 
-    // Vincular parámetros usando bind_param
-    // Importante: bind_param no soporta directamente NULL; usar valores reales en su lugar
+
     $stmt->bind_param(
         "issssssss",
         $p_idRequisicion,

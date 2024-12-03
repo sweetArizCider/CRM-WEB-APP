@@ -99,7 +99,6 @@ if (!isset($_SESSION['token'])) {
             padding-right: 20px;
             
         }
-        /* Ajustes en estilos del modal */
     #modalAgregarCliente, #modalEdit {
         display: none;
         position: fixed;
@@ -191,12 +190,10 @@ if (!isset($_SESSION['token'])) {
                     </tr>
                 </thead>
                 <tbody id="tablaClientesBody">
-                    <!-- Los datos se agregarán aquí dinámicamente -->
                 </tbody>
             </table>
         </div>
 
-        <!-- Modal para añadir un nuevo cliente -->
     <div id="modalAgregarCliente" >
     <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
         <span class="close" onclick="cerrarModalAgregarCliente()">&times;</span>
@@ -267,7 +264,7 @@ if (!isset($_SESSION['token'])) {
             if (result.success) {
                 alert('Cliente agregado con éxito.');
                 cerrarModalAgregarCliente();
-                cargarClientes(); // Actualizar la tabla después de agregar
+                cargarClientes(); 
             } else {
                 alert('Error: ' + result.message);
             }
@@ -285,8 +282,7 @@ if (!isset($_SESSION['token'])) {
             }
             const clientes = await response.json();
             const tablaClientesBody = document.getElementById('tablaClientesBody');
-            tablaClientesBody.innerHTML = ''; // Limpiar la tabla antes de llenarla
-
+            tablaClientesBody.innerHTML = ''; 
             if (Array.isArray(clientes) && clientes.length > 0) {
                 clientes.forEach(cliente => {
                     const fila = document.createElement('tr');
@@ -308,10 +304,8 @@ if (!isset($_SESSION['token'])) {
         }
     }
 
-    // Cargar clientes al cargar la página
     window.onload = cargarClientes;
 
-    // Agregar la funcionalidad para mostrar y cerrar el modal al hacer clic en el botón
     document.getElementById('agregarCliente').addEventListener('click', mostrarModalAgregarCliente);
     document.querySelector('.close').addEventListener('click', cerrarModalAgregarCliente);
 </script>

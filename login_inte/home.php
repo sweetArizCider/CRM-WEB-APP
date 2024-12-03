@@ -99,7 +99,6 @@ if (!isset($_SESSION['token'])) {
             padding-right: 20px;
             
         }
-        /* Ajustes en estilos del modal */
     #modal, #modalEdit {
         display: none;
         position: fixed;

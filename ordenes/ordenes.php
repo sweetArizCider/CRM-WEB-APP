@@ -101,7 +101,6 @@ if (!isset($_SESSION['token'])) {
             padding-right: 20px;
             
         }
-        /* Ajustes en estilos del modal */
     #modal, #modalEdit {
         display: none;
         position: fixed;
@@ -203,22 +202,18 @@ if (!isset($_SESSION['token'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Los datos se agregarán aquí dinámicamente -->
                 </tbody>
             </table>
         </div>
     </div>
-     <!-- Modal para añadir una nueva requisición -->
      <div id="modal">
             <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
                 <span class="close" onclick="cerrarModal()">&times;</span>
                 <h2>Agregar Requisición</h2>
                 <form id="formRequisicion" onsubmit="enviarRequisicion(event)">
-                    <!-- Formulario aquí -->
                     <div class="mb-3">
                     <label for="fkidCliente" class="form-label">Cliente:</label>
                     <select id="fkidCliente" name="fkidCliente" class="form-select" required>
-                        <!-- Opciones se llenarán dinámicamente -->
                     </select>
                     </div>
                     <div class="mb-3">
@@ -250,7 +245,6 @@ if (!isset($_SESSION['token'])) {
                 <span class="close" onclick="cerrarModalEdit()">&times;</span>
                 <h2>Editar Requisición</h2>
                 <form id="editRequisicion" onsubmit="enviarEdicion(event)">
-                    <!-- Formulario aquí -->
                     <div class="mb-3">
             <label for="idRequisicion" class="form-label">ID Requisición:</label>
             <input type="text" id="idRequisicion" name="idRequisicion" class="form-control" required>
@@ -327,7 +321,6 @@ function cerrarModalEdit() {
     modalEdit.style.display = 'none';
 }
 
-// Cerrar modal al hacer clic fuera
 window.onclick = function(event) {
     const modal = document.getElementById('modal');
     const modalEdit = document.getElementById('modalEdit');
@@ -338,7 +331,7 @@ window.onclick = function(event) {
 
 function mostrarModalEdit() {
     document.getElementById('modalEdit').style.display = 'block';
-    document.getElementById('modal').style.display = 'none'; // Cierra el otro modal si está abierto
+    document.getElementById('modal').style.display = 'none'; 
 }
 
 function cerrarModalEdit() {
@@ -363,7 +356,6 @@ function cerrarModalEdit() {
                 if (result.success) {
                     alert('Requisición modificada con éxito.');
                     cerrarModalEdit();
-                    // Llamar a una función para actualizar la tabla si es necesario.
                     cargarDatos();
                 } else {
                     alert('Error: ' + result.message);
@@ -383,7 +375,7 @@ function cerrarModalEdit() {
                 }
                 const clientes = await response.json();
                 const selectCliente = document.getElementById('fkidCliente');
-                selectCliente.innerHTML = ''; // Limpiar opciones anteriores
+                selectCliente.innerHTML = ''; 
 
                 if (Array.isArray(clientes) && clientes.length > 0) {
                     clientes.forEach(cliente => {
@@ -411,7 +403,7 @@ function cerrarModalEdit() {
                 }
                 const requisiciones = await response.json();
                 const tbody = document.querySelector('#tablaRequisiciones tbody');
-                tbody.innerHTML = ''; // Limpiar datos antiguos
+                tbody.innerHTML = ''; 
 
                 requisiciones.forEach(requisicion => {
                     const tr = document.createElement('tr');
@@ -445,7 +437,7 @@ function cerrarModalEdit() {
                 if (result.success) {
                     alert('Requisición creada con éxito.');
                     cerrarModal();
-                    cargarDatos(); // Actualizar la tabla después de enviar
+                    cargarDatos(); 
                 } else {
                     alert('Error: ' + result.message);
                 }
@@ -469,7 +461,6 @@ function cerrarModalEdit() {
             if (result.success) {
                 alert('Requisición modificada con éxito.');
                 cerrarModalEdit();
-                // Llamar a una función para actualizar la tabla si es necesario.
                 cargarDatos();
             } else {
                 alert('Error: ' + result.message);
@@ -482,9 +473,8 @@ function cerrarModalEdit() {
 
     window.onload = () => {
     cargarClientes();
-    cargarDatos(); // Llamar al cargar la página para la tabla
+    cargarDatos(); 
 
-    // Asegúrate de que los modales estén ocultos al cargar
     document.getElementById('modal').style.display = 'none';
     document.getElementById('modalEdit').style.display = 'none';
 };

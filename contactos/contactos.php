@@ -109,7 +109,6 @@ if (!isset($_SESSION['token'])) {
             padding-right: 20px;
             
         }
-        /* Ajustes en estilos del modal */
     #myModal, #myModaal {
         display: none;
         position: fixed;
@@ -257,7 +256,6 @@ if (!isset($_SESSION['token'])) {
     <div id="myModaal" class="modal">
         <div class="modal-content" style="max-height: 90vh; overflow-y: auto;">
         <span class="close" onclick="cerrarMyModal()">&times;</span>
-    <!-- Esto es el contenido de la ventana -->
 
     <form  id="ventana" method="POST" action="añadircontacto.php" name="añacon">
    <h2>Agregar Contacto</h2>
@@ -311,13 +309,12 @@ if (!isset($_SESSION['token'])) {
         function confirmDelete(id) {
             modal.style.display = "block";
             btnEliminarConfirm.onclick = function() {
-                // Enviar la solicitud de eliminación al servidor
                 fetch(`eliminar_contacto.php?id=${id}`)
                     .then(response => response.text())
                     .then(data => {
-                        alert(data); // Mostrar la respuesta del servidor
+                        alert(data); 
                         modal.style.display = "none";
-                        location.reload(); // Recargar la página para reflejar los cambios
+                        location.reload(); 
                     })
                     .catch(error => console.error('Error:', error));
             };

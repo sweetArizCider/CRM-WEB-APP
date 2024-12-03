@@ -123,7 +123,6 @@ include("../service/connection.php");
             padding-right: 20px;
             
         }
-        /* Ajustes en estilos del modal */
     #myModal, #myModaal {
         display: none;
         position: fixed;

@@ -1,5 +1,4 @@
 
-    <!-- Barra de navegación -->
     <nav class="navbar" width="80px">
         <div class="container-fluid">
 
